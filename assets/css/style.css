@@ -13,6 +13,7 @@ body {
     width: 100%;
     height: 100px;
     color: darkblue;
+    background-color: yellowgreen;
     margin-top: 0;
     text-align: center;
     font-size: xx-large;
@@ -23,6 +24,7 @@ body {
     flex-direction: row;
     max-width: 640px;
     height: 100%;
+    justify-content: left ;
   }
   
   * {

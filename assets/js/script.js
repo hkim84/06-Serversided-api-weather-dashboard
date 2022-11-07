@@ -136,5 +136,51 @@ function getWeather(desiredCity) {
         }
     })  
         });
-        
+
+        getFiveDayForecast();
+
+        // Retrieving the five day forecast
+        function getFiveDayForecast() {
+            cardRow.empty();
+            let queryUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${desiredCity}&APPID=${apiKey}&units=imperial`;
+            $.ajax({
+                url: queryUrl,
+                method: "GET"
+            })
+            .then(function(fiveDayReponse) {
+                for (let i = 0; i != fiveDayReponse.list.length; i+=8 ) {
+                    let cityObj = {
+                        date: fiveDayReponse.list[i].dt_txt,
+                        icon: fiveDayReponse.list[i].weather[0].icon,
+                        temp: fiveDayReponse.list[i].main.temp,
+                        humidity: fiveDayReponse.list[i].main.humidity
+                    }
+                    let dateStr = cityObj.date;
+                    let trimmedDate = dateStr.substring(0, 10); 
+                    let weatherIco = `https:///openweathermap.org/img/w/${cityObj.icon}.png`;
+                    createForecastCard(trimmedDate, weatherIco, cityObj.temp, cityObj.humidity);
+                }
+            })
+        }   
     }
+    
+    //5 day card for weahter
+    function createForecastCard(date, icon, temp, humidity) {
+    
+        // weather data
+        let fiveDayCardEl = $("<div>").attr("class", "five-day-card");
+        let cardDate = $("<h3>").attr("class", "card-text");
+        let cardIcon = $("<img>").attr("class", "weatherIcon");
+        let cardTemp = $("<p>").attr("class", "card-text");
+        let cardHumidity = $("<p>").attr("class", "card-text");
+    
+        // data for forecast
+        cardRow.append(fiveDayCardEl);
+        cardDate.text(date);
+        cardIcon.attr("src", icon);
+        cardTemp.text(`Temp: ${temp} °F`);
+        cardHumidity.text(`Humidity: ${humidity}%`);
+        fiveDayCardEl.append(cardDate, cardIcon, cardTemp, cardHumidity);
+    }
+
+
