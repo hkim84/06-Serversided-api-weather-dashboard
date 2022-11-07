@@ -11,3 +11,18 @@
 // 11. icon representation of weather conditions, the temperature, the wind speed, and the humidity
 // 12. click on a city in the search history
 // 13. presented with current and future conditions for that city
+// 14. my api key 95028fce1cd337d92f5a1a326f72a774
+
+
+// var for current date
+var today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
+var today = mm + '/' + dd + '/' + yyyy;
+
+// DOM TO API info
+let apiKey = "95028fce1cd337d92f5a1a326f72a774";
+let searchBtn = $(".searchBtn");
+let searchInput = $(".searchInput");
+
